@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTA Roleplay Servers</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    .hero {
+      background-color: #222;
+      color: #fff;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .server-list {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .server-item {
+      margin: 10px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .server-item:hover {
+      transform: scale(1.05);
+    }
+
+    .about-section {
+      padding: 40px;
+      background-color: #fafafa;
+      text-align: center;
+    }
+
+    /* النافذة المنبثقة */
+    .modal-custom {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1050;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content-custom {
+      background-color: #4a148c;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 400px;
+      opacity: 0;
+      transform: translateY(-100px);
+      animation: slideDown 0.5s ease forwards;
+      z-index: 1060;
+    }
+
+    .modal-content-custom h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .modal-content-custom button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .modal-content-custom .yes {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .modal-content-custom .no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .modal-content-custom button:hover {
+      opacity: 0.8;
+    }
+
+    /* أنيميشن الانزلاق */
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* إشعار التنبيه */
+    .notification {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #333;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 5px;
+      z-index: 1100;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeInOut 3s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- قسم الصورة الرئيسية -->
+  <div class="hero">
+    <div>
+      <h1>GTA 5 Roleplay Servers</h1>
+      <p>Join the best international roleplay servers today!</p>
+      <button class="btn btn-warning btn-lg" id="startPlaying">Start Playing</button>
+    </div>
+  </div>
+
+  <!-- قائمة السيرفرات -->
+  <div class="container server-list" id="serverList" style="display: none;">
+    <h2>Available Servers</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="server-item">
+          <p>English #1</p>
+          <span>758 Players</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="server-item">
+          <p>German #1</p>
+          <span>607 Players</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="server-item">
+          <p>Italian #1</p>
+          <span>620 Players</span>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="server-item">
+          <p>French #1</p>
+          <span>91 Players</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- قسم عن اللعبة -->
+  <div class="about-section">
+    <h2>About Us</h2>
+    <p>Explore the immersive world of GTA 5 roleplay. Play with thousands of players worldwide and create your story!</p>
+    <a href="#" class="btn btn-danger">Learn More</a>
+  </div>
+
+  <!-- النافذة المنبثقة -->
+  <div class="modal-custom" id="licenseModal">
+    <div class="modal-content-custom">
+      <h2>Do you have a licensed GTA 5?</h2>
+      <button class="yes" id="yesBtn">Yes, I Do</button>
+      <button class="no" id="noBtn">No</button>
+    </div>
+  </div>
+
+  <!-- إشعار -->
+  <div class="notification" id="notification">
+    You need a licensed GTA 5 to play.
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const startPlayingBtn = document.getElementById("startPlaying");
+    const licenseModal = document.getElementById("licenseModal");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const serverList = document.getElementById("serverList");
+    const notification = document.getElementById("notification");
+
+    // عرض النافذة المنبثقة
+    startPlayingBtn.addEventListener("click", () => {
+      licenseModal.style.display = "flex";
+    });
+
+    // عند الضغط على زر "Yes"
+    yesBtn.addEventListener("click", () => {
+      licenseModal.style.display = "none";
+      serverList.style.display = "block"; // عرض قائمة السيرفرات
+    });
+
+    // عند الضغط على زر "No"
+    noBtn.addEventListener("click", () => {
+      licenseModal.style.display = "none";
+      notification.style.display = "block"; // عرض الإشعار
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 3000); // إخفاء الإشعار بعد 3 ثوانٍ
+    });
+  </script>
+</body>
+</html>
