@@ -1,249 +1,360 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GTA Roleplay Servers</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-    }
-
-    .hero {
-      background-color: #222;
-      color: #fff;
-      height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-
-    .server-list {
-      margin: 40px 0;
-      text-align: center;
-    }
-
-    .server-item {
-      margin: 10px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-    }
-
-    .server-item:hover {
-      transform: scale(1.05);
-    }
-
-    .about-section {
-      padding: 40px;
-      background-color: #fafafa;
-      text-align: center;
-    }
-
-    /* النافذة المنبثقة */
-    .modal-custom {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 1050;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content-custom {
-      background-color: #4a148c;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      color: white;
-      width: 90%;
-      max-width: 400px;
-      opacity: 0;
-      transform: translateY(-100px);
-      animation: slideDown 0.5s ease forwards;
-      z-index: 1060;
-    }
-
-    .modal-content-custom h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .modal-content-custom button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px;
-    }
-
-    .modal-content-custom .yes {
-      background-color: #4caf50;
-      color: white;
-    }
-
-    .modal-content-custom .no {
-      background-color: #f44336;
-      color: white;
-    }
-
-    .modal-content-custom button:hover {
-      opacity: 0.8;
-    }
-
-    /* أنيميشن الانزلاق */
-    @keyframes slideDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-100px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* إشعار التنبيه */
-    .notification {
-      display: none;
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #333;
-      color: #fff;
-      padding: 15px 20px;
-      border-radius: 5px;
-      z-index: 1100;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: fadeInOut 3s ease forwards;
-    }
-
-    @keyframes fadeInOut {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      10% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الألعاب</title>
+    <style>
+        :root {
+            --background-dark: #1b2838;
+            --background-light: #2a475e;
+            --accent-color: #66c0f4;
+            --text-light: #c7d5e0;
+            --text-white: #ffffff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        .header {
+            background-color: var(--background-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            color: var(--text-white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: var(--background-light);
+            height: calc(100vh - 60px);
+            position: fixed;
+            right: 0;
+            top: 60px;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .sidebar-category {
+            margin-bottom: 20px;
+        }
+        .sidebar-category-title {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+        .sidebar-category-item {
+            color: var(--text-light);
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        .sidebar-category-item:hover {
+            color: var(--text-white);
+            background-color: rgba(102, 192, 244, 0.1);
+        }
+        .main-content {
+            margin-right: 250px;
+            padding: 20px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            background-color: var(--background-light);
+            border: 1px solid var(--accent-color);
+            color: var(--text-white);
+            border-radius: 4px;
+        }
+        .featured-games {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .game-card {
+            background-color: var(--background-light);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 70%, rgba(0,0,0,0.7));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+        .game-card:hover::before {
+            opacity: 1;
+        }
+        .game-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        .game-card-info {
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        .game-card:hover .game-card-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .game-title {
+            color: var(--text-white);
+            margin-bottom: 5px;
+        }
+        .game-price {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        .footer {
+            background-color: var(--background-light);
+            color: var(--text-light);
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+        @media screen and (max-width: 1024px) {
+            .main-content {
+                margin-right: 0;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                transform: translateX(100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .nav-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--background-light);
+                padding: 10px;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .featured-games {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            .game-card img {
+                height: 200px;
+            }
+            .header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .featured-games {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            .game-card img {
+                height: 150px;
+            }
+            .search-input {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- قسم الصورة الرئيسية -->
-  <div class="hero">
-    <div>
-      <h1>GTA 5 Roleplay Servers</h1>
-      <p>Join the best international roleplay servers today!</p>
-      <button class="btn btn-warning btn-lg" id="startPlaying">Start Playing</button>
-    </div>
-  </div>
-
-  <!-- قائمة السيرفرات -->
-  <div class="container server-list" id="serverList" style="display: none;">
-    <h2>Available Servers</h2>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="server-item">
-          <p>English #1</p>
-          <span>758 Players</span>
+    <header class="header">
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
+        <div class="logo">
+            <img src="/api/placeholder/40/40" alt="شعار المتجر">
+            Steam
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="server-item">
-          <p>German #1</p>
-          <span>607 Players</span>
+        <nav class="nav-menu" id="navMenu">
+            <a href="#">المتجر</a>
+            <a href="#">المجتمع</a>
+            <a href="#">المكتبة</a>
+            <a href="#">دعم</a>
+        </nav>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-category">
+            <div class="sidebar-category-title">الفئات</div>
+            <div class="sidebar-category-item">أكشن</div>
+            <div class="sidebar-category-item">مغامرات</div>
+            <div class="sidebar-category-item">استراتيجية</div>
+            <div class="sidebar-category-item">رياضة</div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="server-item">
-          <p>Italian #1</p>
-          <span>620 Players</span>
+        <div class="sidebar-category">
+            <div class="sidebar-category-title">العناوين الشهيرة</div>
+            <div class="sidebar-category-item">أفضل المبيعات</div>
+            <div class="sidebar-category-item">التخفيضات</div>
+            <div class="sidebar-category-item">حديثًا وذات صلة</div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="server-item">
-          <p>French #1</p>
-          <span>91 Players</span>
+    </aside>
+
+    <main class="main-content">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="ابحث عن لعبة...">
         </div>
-      </div>
-    </div>
-  </div>
+        <section class="featured-games" id="games-container">
+            <!-- سيتم إضافة بطاقات الألعاب هنا -->
+        </section>
+    </main>
 
-  <!-- قسم عن اللعبة -->
-  <div class="about-section">
-    <h2>About Us</h2>
-    <p>Explore the immersive world of GTA 5 roleplay. Play with thousands of players worldwide and create your story!</p>
-    <a href="#" class="btn btn-danger">Learn More</a>
-  </div>
+    <footer class="footer">
+        © 2024 متجر الألعاب. جميع الحقوق محفوظة.
+    </footer>
 
-  <!-- النافذة المنبثقة -->
-  <div class="modal-custom" id="licenseModal">
-    <div class="modal-content-custom">
-      <h2>Do you have a licensed GTA 5?</h2>
-      <button class="yes" id="yesBtn">Yes, I Do</button>
-      <button class="no" id="noBtn">No</button>
-    </div>
-  </div>
+    <script>
+        const games = [
+            {
+                title: "المغامرة النهائية",
+                price: "49.99 دولار",
+                image: "/api/placeholder/240/320"
+            },
+            {
+                title: "معركة الممالك",
+                price: "39.99 دولار",
+                image: "/api/placeholder/240/320"
+            },
+            {
+                title: "سباق المستقبل",
+                price: "29.99 دولار",
+                image: "/api/placeholder/240/320"
+            },
+            {
+                title: "عالم مفتوح",
+                price: "59.99 دولار",
+                image: "/api/placeholder/240/320"
+            },
+            {
+                title: "حرب النجوم",
+                price: "44.99 دولار",
+                image: "/api/placeholder/240/320"
+            },
+            {
+                title: "مغامرات الفضاء",
+                price: "34.99 دولار",
+                image: "/api/placeholder/240/320"
+            }
+        ];
 
-  <!-- إشعار -->
-  <div class="notification" id="notification">
-    You need a licensed GTA 5 to play.
-  </div>
+        function renderGames() {
+            const container = document.getElementById('games-container');
+            games.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.classList.add('game-card');
+                gameCard.innerHTML = `
+                    <img src="${game.image}" alt="${game.title}">
+                    <div class="game-card-info">
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-price">${game.price}</div>
+                    </div>
+                `;
+                container.appendChild(gameCard);
+            });
+        }
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const startPlayingBtn = document.getElementById("startPlaying");
-    const licenseModal = document.getElementById("licenseModal");
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const serverList = document.getElementById("serverList");
-    const notification = document.getElementById("notification");
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const sidebar = document.getElementById('sidebar');
+            navMenu.classList.toggle('active');
+            sidebar.classList.toggle('active');
+        }
 
-    // عرض النافذة المنبثقة
-    startPlayingBtn.addEventListener("click", () => {
-      licenseModal.style.display = "flex";
-    });
-
-    // عند الضغط على زر "Yes"
-    yesBtn.addEventListener("click", () => {
-      licenseModal.style.display = "none";
-      serverList.style.display = "block"; // عرض قائمة السيرفرات
-    });
-
-    // عند الضغط على زر "No"
-    noBtn.addEventListener("click", () => {
-      licenseModal.style.display = "none";
-      notification.style.display = "block"; // عرض الإشعار
-      setTimeout(() => {
-        notification.style.display = "none";
-      }, 3000); // إخفاء الإشعار بعد 3 ثوانٍ
-    });
-  </script>
+        renderGames();
+    </script>
 </body>
 </html>
