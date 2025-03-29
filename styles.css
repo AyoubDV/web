@@ -1,0 +1,285 @@
+/* الشيفرة الأساسية تبقى كما هي */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    direction: rtl;
+}
+
+.top-bar {
+    background-color: #212121;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.top-bar button {
+    background-color: #333;
+    border: 2px solid #555;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.top-bar button:hover {
+    background-color: #555;
+    border-color: #777;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.play-now {
+    background-color: #007BFF;
+    border-color: #0056b3;
+}
+
+.play-now:hover {
+    background-color: #0056b3;
+    border-color: #003f7f;
+}
+
+/* باقي الشيفرة كما هي */
+.container {
+    display: flex;
+    height: calc(100vh - 60px);
+    padding: 0;
+    margin: 0;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* منع ظهور شريط التمرير الأفقي */
+    background-color: #181818; /* جعل الخلفية شفافة */
+}
+
+
+.sidebar {
+    width: 25%;
+    background-color: #212121;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    background-color: #333;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li .icon {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.sidebar ul li:hover {
+    background-color: #444;
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #181818;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 18px;
+    text-align: center;
+    max-width: 600px;
+}
+
+/* إعدادات الانتقال */
+.page {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page-exit {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* إعدادات الانتقال السلس */
+.page {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.page-exit {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+
+
+.content button {
+    background-color: #9961ff;
+    border: 2px solid #553f7c;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.content button:hover {
+    background-color: #553f7c;
+    border-color: #9961ff;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.mtajoin {
+    flex: 1;
+    padding: 40px;
+    background-color: #181818;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mtajoin h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.mtajoin p {
+    font-size: 18px;
+    text-align: center;
+    max-width: 600px;
+}
+
+
+.mtajoin button {
+    background-color: #ffae00;
+    border: 2px solid #ffad61;
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.mtajoin button:hover {
+    background-color: #ffad61;
+    border-color: #ffae00;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center; /* يضع الشعار في وسط الحاوية أفقياً */
+    align-items: center; /* يضع الشعار في وسط الحاوية عمودياً */
+    padding: 0; /* إزالة أي حشوات */
+    margin: 0; /* إزالة أي هوامش */
+    width: 100%;
+    height: 100%;
+    background-color: #181818; /* جعل الخلفية شفافة */
+    margin-bottom:-100px; /* تقليل المسافة السفلية للشعار */
+    text-align: center; /* لتوسيط الشعار */
+}
+
+.logo-img {
+    max-width: 30%;
+    max-height: 30%;
+    object-fit: contain; /* يحافظ على أبعاد الصورة داخل الحاوية */
+}
+
+.text-container {
+    margin-top: 0; /* إزالة أي مسافة علوية غير ضرورية للكتابة */
+    text-align: center; /* لتوسيط النص */
+}
+
+/* تخصيص شريط التمرير بأكمله */
+::-webkit-scrollbar {
+    width: 10px; /* عرض شريط التمرير */
+    height: 10px; /* ارتفاع شريط التمرير الأفقي */
+}
+
+/* خلفية شريط التمرير */
+::-webkit-scrollbar-track {
+    background: #1e1e1e; /* لون الخلفية لشريط التمرير */
+    border-radius: 10px; /* زوايا دائرية لشريط التمرير */
+}
+
+/* مقبض شريط التمرير */
+::-webkit-scrollbar-thumb {
+    background-color: #6c2cff; /* لون المقبض */
+    border-radius: 10px; /* زوايا دائرية للمقبض */
+    border: 2px solid #1e1e1e; /* حواف المقبض */
+}
+
+/* عند التمرير فوق المقبض */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #6c2cff; /* تغيير اللون عند التمرير فوقه */
+}
+
+/* تخصيص شريط التمرير الأفقي */
+::-webkit-scrollbar-horizontal {
+    height: 10px; /* ارتفاع شريط التمرير الأفقي */
+}
+
+.custom-button {
+    background-color: #6a0dad; /* لون خلفية الزر */
+    color: white; /* لون النص */
+    padding: 10px 20px; /* مساحة داخلية للزر */
+    border-radius: 5px; /* زوايا دائرية */
+    display: flex; /* لتنسيق الأيقونة والنص بجانب بعض */
+    align-items: center; /* محاذاة الأيقونة والنص في المركز */
+    cursor: pointer; /* تغيير المؤشر عند التمرير فوق الزر */
+}
+
+.button-icon {
+    width: 60px; /* عرض الأيقونة */
+    height: 60px; /* ارتفاع الأيقونة */
+    margin-right: -10px; /* مسافة بين الأيقونة والنص */
+}
