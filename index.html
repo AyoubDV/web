@@ -18,14 +18,16 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Arial', 'Tahoma', sans-serif;
             background-color: var(--background-dark);
             color: var(--text-light);
             line-height: 1.6;
+            text-align: right;
         }
         .header {
             background-color: var(--background-light);
             display: flex;
+            flex-direction: row-reverse;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
@@ -39,6 +41,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             display: flex;
+            flex-direction: row-reverse;
             align-items: center;
             gap: 10px;
         }
@@ -48,6 +51,7 @@
         }
         .nav-menu {
             display: flex;
+            flex-direction: row-reverse;
             gap: 20px;
         }
         .nav-menu a {
@@ -62,7 +66,7 @@
             width: 0;
             height: 2px;
             bottom: -5px;
-            left: 0;
+            right: 0;
             background-color: var(--accent-color);
             transition: width 0.3s ease;
         }
@@ -107,6 +111,7 @@
             transition: all 0.3s ease;
             padding: 5px 10px;
             border-radius: 4px;
+            text-align: right;
         }
         .sidebar-category-item:hover {
             color: var(--text-white);
@@ -129,6 +134,7 @@
             border: 1px solid var(--accent-color);
             color: var(--text-white);
             border-radius: 4px;
+            text-align: right;
         }
         .featured-games {
             display: grid;
@@ -147,7 +153,7 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(transparent 70%, rgba(0,0,0,0.7));
@@ -163,26 +169,34 @@
         }
         .game-card img {
             width: 100%;
-            height: 320px;
+            height: 200px;
             object-fit: cover;
         }
         .game-card-info {
             padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: right;
+        }
+        .game-card-hover-info {
             position: absolute;
             bottom: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s ease;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: right;
         }
-        .game-card:hover .game-card-info {
+        .game-card:hover .game-card-hover-info {
             opacity: 1;
             transform: translateY(0);
         }
         .game-title {
             color: var(--text-white);
             margin-bottom: 5px;
+            font-weight: bold;
         }
         .game-price {
             color: var(--accent-color);
@@ -192,21 +206,32 @@
             background-color: var(--background-light);
             color: var(--text-light);
             text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
             box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
         }
+        
+        /* شريط تمرير مخصص لمتصفحات WebKit (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--background-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4ba0d4;
+        }
+        
         @media screen and (max-width: 1024px) {
             .main-content {
                 margin-right: 0;
             }
             .sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-                transform: translateX(100%);
+                transform: translateX(-100%);
             }
             .sidebar.active {
                 transform: translateX(0);
@@ -222,7 +247,7 @@
                 flex-direction: column;
                 position: absolute;
                 top: 100%;
-                left: 0;
+                right: 0;
                 width: 100%;
                 background-color: var(--background-light);
                 padding: 10px;
@@ -233,10 +258,10 @@
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
             .game-card img {
-                height: 200px;
+                height: 150px;
             }
             .header {
-                flex-direction: column;
+                flex-direction: row-reverse;
                 gap: 10px;
             }
         }
@@ -245,42 +270,63 @@
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
             .game-card img {
-                height: 150px;
+                height: 120px;
             }
             .search-input {
                 max-width: 100%;
             }
         }
+
+        /* زر شراء اللعبة */
+        .buy-button {
+            background-color: var(--accent-color);
+            color: var(--background-dark);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        .buy-button:hover {
+            background-color: #4ba0d4;
+        }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
         <div class="logo">
             <img src="/api/placeholder/40/40" alt="شعار المتجر">
-            Steam
+            متجر الألعاب
         </div>
         <nav class="nav-menu" id="navMenu">
             <a href="#">المتجر</a>
             <a href="#">المجتمع</a>
             <a href="#">المكتبة</a>
-            <a href="#">دعم</a>
+            <a href="#">الدعم</a>
         </nav>
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</div>
     </header>
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-category">
             <div class="sidebar-category-title">الفئات</div>
-            <div class="sidebar-category-item">أكشن</div>
-            <div class="sidebar-category-item">مغامرات</div>
-            <div class="sidebar-category-item">استراتيجية</div>
-            <div class="sidebar-category-item">رياضة</div>
+            <div class="sidebar-category-item">ألعاب أكشن</div>
+            <div class="sidebar-category-item">ألعاب مغامرات</div>
+            <div class="sidebar-category-item">ألعاب استراتيجية</div>
+            <div class="sidebar-category-item">ألعاب رياضية</div>
+            <div class="sidebar-category-item">ألعاب تصويب</div>
+            <div class="sidebar-category-item">ألعاب تقمص الأدوار</div>
         </div>
         <div class="sidebar-category">
             <div class="sidebar-category-title">العناوين الشهيرة</div>
             <div class="sidebar-category-item">أفضل المبيعات</div>
-            <div class="sidebar-category-item">التخفيضات</div>
-            <div class="sidebar-category-item">حديثًا وذات صلة</div>
+            <div class="sidebar-category-item">الألعاب المخفضة</div>
+            <div class="sidebar-category-item">الإصدارات الجديدة</div>
+            <div class="sidebar-category-item">الموصى بها لك</div>
         </div>
     </aside>
 
@@ -294,7 +340,7 @@
     </main>
 
     <footer class="footer">
-        © 2024 متجر الألعاب. جميع الحقوق محفوظة.
+        © 2025 متجر الألعاب. جميع الحقوق محفوظة.
     </footer>
 
     <script>
@@ -328,6 +374,16 @@
                 title: "مغامرات الفضاء",
                 price: "34.99 دولار",
                 image: "/api/placeholder/240/320"
+            },
+            {
+                title: "أسطورة الفارس",
+                price: "54.99 دولار",
+                image: "/api/placeholder/240/320"
+            },
+            {
+                title: "كرة القدم 2025",
+                price: "49.99 دولار",
+                image: "/api/placeholder/240/320"
             }
         ];
 
@@ -342,6 +398,11 @@
                         <div class="game-title">${game.title}</div>
                         <div class="game-price">${game.price}</div>
                     </div>
+                    <div class="game-card-hover-info">
+                        <div class="game-title">${game.title}</div>
+                        <div class="game-price">${game.price}</div>
+                        <button class="buy-button">شراء اللعبة</button>
+                    </div>
                 `;
                 container.appendChild(gameCard);
             });
@@ -354,7 +415,18 @@
             sidebar.classList.toggle('active');
         }
 
-        renderGames();
+        // تغيير إعدادات التنسيق في حالة وجود مشاكل مع RTL
+        function fixRTLLayout() {
+            // تأكد من تطبيق اتجاه RTL على العناصر المهمة
+            document.querySelectorAll('.game-title, .game-price, .sidebar-category-item').forEach(el => {
+                el.style.textAlign = 'right';
+            });
+        }
+
+        window.onload = function() {
+            renderGames();
+            fixRTLLayout();
+        };
     </script>
 </body>
 </html>
